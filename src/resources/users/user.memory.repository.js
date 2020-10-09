@@ -11,10 +11,7 @@ const getAll = async () => {
 
 const getByID = async id => {
   const user = await db.getByID(USER, id);
-  if (user) {
-    return UserModel.toResponse(user);
-  }
-  return [];
+  return user ? UserModel.toResponse(user) : [];
 };
 
 const getTasks = async id => {

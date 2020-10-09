@@ -1,50 +1,52 @@
 const router = require('express').Router();
 
-const usersService = require('./user.service');
-const { createUserSchema, updateUserSchema } = require('./user.validator');
+const boardService = require('./board.service');
+const { createBoardSchema, updateBoardSchema } = require('./board.validator');
 
 router.route('/').get(async (_req, res) => {
-  const users = await usersService.getAll();
+  const boards = await boardService.getAll();
   res
     .set('Accept', 'application/json')
     .status(200)
     .contentType('application/json')
-    .json(users);
+    .json(boards);
 });
 
 router.route('/:id').get(async (req, res) => {
-  const user = await usersService.getByID(req.params.id);
+  const board = await boardService.getByID(req.params.id);
   res
     .set('Accept', 'application/json')
-    .status(user ? 200 : 404)
+    .status(board ? 200 : 404)
     .contentType('application/json')
-    .json(user);
+    .json(board);
 });
 
 router.route('/').post(async (req, res) => {
-  const { error, value } = createUserSchema.validate(req.body);
+  const { error, value } = createBoardSchema.validate(req.body);
   res.set('Accept', 'application/json').contentType('application/json');
   if (error) {
     res.status(400).json({ error });
   } else {
-    const user = await usersService.addItem(value);
-    res.status(200).json(user);
+    const board = await boardService.addItem(value);
+    res.status(200).json(board);
   }
 });
 
 router.route('/:id').put(async (req, res) => {
-  const { error, value } = updateUserSchema.validate(req.body);
+  const { error, value } = updateBoardSchema.validate(req.body);
   res.set('Accept', 'application/json').contentType('application/json');
   if (error) {
     res.status(400).json({ error });
   } else {
-    const user = await usersService.updateItem(req.params.id, value);
-    res.status(200).json(user);
+    const board = await boardService.updateItem(req.params.id, value);
+    console.log(req.params.id);
+    console.log(board);
+    res.status(200).json(board);
   }
 });
 
 router.route('/:id').delete(async (req, res) => {
-  const query_res = await usersService.deleteItem(req.params.id);
+  const query_res = await boardService.deleteItem(req.params.id);
   res
     .set('Accept', 'application/json')
     .status(query_res ? 204 : 404)

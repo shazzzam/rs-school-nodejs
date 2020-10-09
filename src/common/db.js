@@ -1,7 +1,8 @@
 const uuid = require('uuid');
 
-const { userData } = require('./db_data');
+const { userData, boardData } = require('./db_data');
 const UserModel = require('../resources/users/user.model');
+const { ColumnModel, BoardModel } = require('../resources/boards/board.model');
 
 const db = {
   Users: [],
@@ -32,8 +33,11 @@ const db = {
   updateItem(table, id, item) {
     let updatedItem = item;
     this[table] = this[table].map(oldItem => {
-      updatedItem = oldItem.id === id ? Object.assign(oldItem, item) : oldItem;
-      return updatedItem;
+      if (oldItem.id === id) {
+        updatedItem = Object.assign(oldItem, item);
+        return updatedItem;
+      }
+      return oldItem;
     });
     return updatedItem;
   },
@@ -58,6 +62,11 @@ const db = {
 
 userData.map(user => {
   db.Users.push(new UserModel(user));
+});
+
+boardData.map(board => {
+  board.columns = board.columns.map(column => new ColumnModel(column));
+  db.Boards.push(new BoardModel(board));
 });
 
 module.exports = {
