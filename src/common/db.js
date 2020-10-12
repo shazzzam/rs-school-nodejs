@@ -1,8 +1,9 @@
 const uuid = require('uuid');
 
-const { userData, boardData } = require('./db_data');
+const { userData, boardData, taskData } = require('./db_data');
 const UserModel = require('../resources/users/user.model');
 const { ColumnModel, BoardModel } = require('../resources/boards/board.model');
+const TaskModel = require('../resources/tasks/task.model');
 
 const db = {
   Users: [],
@@ -55,7 +56,7 @@ const db = {
   },
 
   deleteChildren(table, parentColumn, parentId) {
-    this[table] = this[table].filter(item => item[parentColumn] === parentId);
+    this[table] = this[table].filter(item => item[parentColumn] !== parentId);
     return true;
   }
 };
@@ -67,6 +68,10 @@ userData.map(user => {
 boardData.map(board => {
   board.columns = board.columns.map(column => new ColumnModel(column));
   db.Boards.push(new BoardModel(board));
+});
+
+taskData.map(task => {
+  db.Tasks.push(new TaskModel(task));
 });
 
 module.exports = {

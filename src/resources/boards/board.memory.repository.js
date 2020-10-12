@@ -5,13 +5,11 @@ const BOARD = 'Boards';
 const TASK = 'Tasks';
 const BOARD_COLUMN = 'boardId';
 
-const getAll = async () => {
-  return await db.getAll(BOARD);
-};
+const getAll = async () => await db.getAll(BOARD);
 
 const getByID = async id => {
   const board = await db.getByID(BOARD, id);
-  return board ? board : [];
+  return board ? board : false;
 };
 
 const addItem = async board => {
@@ -21,7 +19,6 @@ const addItem = async board => {
 
 const updateItem = async (id, board) => {
   board.columns = board.columns.map(column => new ColumnModel(column));
-  console.log(id);
   return await db.updateItem(BOARD, id, board);
 };
 

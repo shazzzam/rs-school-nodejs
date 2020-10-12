@@ -17,6 +17,7 @@ const updateColumnSchema = Joi.object({
 });
 
 const updateBoardSchema = Joi.object({
+  id: Joi.string(),
   title: Joi.string(),
   columns: Joi.array().items(updateColumnSchema)
 });
