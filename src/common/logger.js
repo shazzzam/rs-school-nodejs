@@ -27,7 +27,6 @@ const errorMorgan = morgan(
 );
 
 const errorLogger = (err, req, res, next) => {
-  next(err);
   return errorMorgan(req, res, next);
 };
 
