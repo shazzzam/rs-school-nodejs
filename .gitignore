@@ -1,2 +1,5 @@
 node_modules
 yarn.lock
+access.log
+error.log
+process-error.log

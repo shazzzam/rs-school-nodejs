@@ -1,3 +1,16 @@
+# Информация для проверяющий crosscheck
+
+Лог файлы
+access.log - лог доступа к серверу содержащий
+error.log - лог ошибок доступа к серверу, включая 40*, т.е. ошибки валидации и ошибки доступа к отсутсвующим сущностям.
+помимо штатных ошибок добавлен свой обработчик ошибок, с помощю которого можно возвращать пользвателю респонс с нужным статус кодом и сообщением ошибки
+```
+    throw new Error('Unknown error');
+    throw new ErrorHandler(500, 'Internal sever error');
+```
+
+process-error.log - лог с ошибками процесса. uncaughtException и unhandledRejection лежат в нем 
+
 # RS School REST service
 
 ## Prerequisites
