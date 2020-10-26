@@ -11,7 +11,7 @@ const createBoardSchema = Joi.object({
 });
 
 const updateColumnSchema = Joi.object({
-  id: Joi.string().required(),
+  _id: Joi.string(),
   title: Joi.string(),
   order: Joi.number()
 });

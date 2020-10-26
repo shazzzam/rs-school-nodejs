@@ -1,3 +1,3 @@
-const taskRepo = require('./task.memory.repository');
+const taskRepo = require('./task.mongo.repository');
 
 module.exports = taskRepo;

@@ -1,9 +1,9 @@
 const uuid = require('uuid');
 
 const { userData, boardData, taskData } = require('./db_data');
-const UserModel = require('../resources/users/user.model');
+const { UserModel } = require('../resources/users/user.model');
 const { ColumnModel, BoardModel } = require('../resources/boards/board.model');
-const TaskModel = require('../resources/tasks/task.model');
+const { TaskModel } = require('../resources/tasks/task.model');
 
 const db = {
   Users: [],

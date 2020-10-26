@@ -1,3 +1,3 @@
-const usersRepo = require('./user.memory.repository');
+const usersRepo = require('./user.mongo.repository');
 
 module.exports = usersRepo;
