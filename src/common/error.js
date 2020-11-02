@@ -19,7 +19,7 @@ const handleError = (err, res, next) => {
 
 const errorCatcher = callback => async (req, res, next) => {
   try {
-    return await callback(req, res);
+    return await callback(req, res, next);
   } catch (error) {
     return next(error);
   }

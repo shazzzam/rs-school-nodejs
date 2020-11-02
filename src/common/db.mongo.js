@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const { User } = require('../resources/users/user.model');
 const { Board } = require('../resources/boards/board.model');
@@ -17,8 +18,9 @@ const connectToDB = callback => {
   db.once('open', () => {
     db.dropDatabase();
 
-    userData.map(user => {
-      User(user).save();
+    userData.map(async user => {
+      const newPass = await bcrypt.hash(user.password, 10);
+      User({ ...user, password: newPass }).save();
     });
 
     boardData.map(board => {

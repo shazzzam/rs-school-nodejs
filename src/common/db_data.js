@@ -3,7 +3,7 @@ const userData = [
     id: 'd038e09a-e01f-4697-860b-c9d3cf100db8',
     name: 'John Doe',
     login: 'admin',
-    password: 'PaSsWoRd'
+    password: 'admin'
   },
   {
     id: 'faec7968-8d46-411a-9573-7ae087a118cc',
